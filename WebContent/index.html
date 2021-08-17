@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="index.js"></script>
+    <meta charset="ISO-8859-1">
+    <title>Highradius</title>
+    <script src="addData.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="index.css" rel="stylesheet">
+    <link href="modal.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+</head>
+
+<body>
+    <div class="background">
+        <img src="images\Group 20399.svg" class="moveabc">
+        <img src="images\logo.svg" class="movehigh">
+        <div class="ilist">
+            <br><br><br><br>
+            <p style="font-size:20px; color: #FFFFFF;"> Invoice List </p>
+        </div>
+        <div id="addModal" class="modal">
+            <div class="modal_content">
+                <div class="modal_header">
+                    <img src="images\baseline-close-24px.svg" class="close">
+                    <div> Add Inovice</div>
+                </div>
+                <div class="modal_body">
+                    <div class="left_column">
+                        <div class="entry">
+                            Customer Name
+                            <input class="add_input" id="add_cust_name" type="text">
+                        </div>
+                        <div class="entry">
+                            Customer No.
+                            <input class="add_input" id="add_cust_no" type="text">
+                        </div>
+                        <div class="entry">
+                            Invoice No.
+                            <input class="add_input" id="add_invoice_no" type="text">
+                        </div>
+                        <div class="entry">
+                            Invoice Amount
+                            <input class="add_input" id="add_invoice_amt" type="text">
+                        </div>
+                    </div>
+                    <div class="right_column">
+                        <div class="entry" id="date_input">
+                            Due Date
+                            <input class="add_input" type="date" id="halwa">
+                        </div>
+                        <div class="entry" id="notes_field">
+                            Notes
+                            <textarea class="notes_entry" cols="20" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <!--<div id="add-modal-snack-bar">
+                        <img src="images/Path 18298.svg" id="warning-icon">
+                        <span>Mandatory fields cannot be empty.</span>
+                    </div>-->
+                </div>
+                <div class="modal_footer">
+                    <a class="cancel" style="color:  #14AFF1; text-decoration: none;">Cancel</a>
+                    <div class="footer_end">
+                        <button id="clear_btn" onclick="clearAll()">
+                            <p class="buttons_clear"> Clear </p>
+                        </button>
+                        <button id="add_btn" onclick="add_in_db()">
+                            <p class="buttons_add"> Add </p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="editModal" class="modalEdit">
+            <div class="modal-content-edit">
+                <div class="modal-header-edit">
+                    <img src="images\baseline-close-24px.svg" class="close">
+                    <div>Edit Invoice</div>
+                </div>
+                <div class="modal-body-edit">
+                    <div class="column-edit">
+                        <div class="entry">
+                            Invoice Amount
+                            <input class="add_input_edit" type="text">
+                        </div>
+                        <div class="entry" id="notes_field">
+                            Notes
+                            <textarea class="notes_entry" cols="20" rows="10"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer-edit">
+                    <a href="" class="cancel" style="color:  #14AFF1; text-decoration: none;">Cancel</a>
+                    <div class="footer_end">
+                        <button id="clear_btn" onclick="clearAll()">
+                            <p class="buttons_clear"> Reset </p>
+                        </button>
+                        <button id="add_btn" onclick="modal_edit()">
+                            <p class="buttons_add"> Save </p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="delModal" class="modalDel">
+            <div class="modal-content-del">
+                <div class="modal-header-del">
+                    <img src="images\baseline-close-24px.svg" class="close">
+                    <div style="text-transform : none">Delete Record(s)?</div>
+                </div>
+                <div class="modal-body-del">
+                    <div class="column-del">
+                        <div class="entry">
+                            <text class="del_text">You'll lose your record(s) after this action. We can't recover them once you delete. Are you sure you want to <strong>permanently delete</strong> them?</text>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer-del">
+                    <div class="footer_end">
+                        <div></div>
+                        <button id="clear_btn" onclick="modal_del()">
+                            <a href="" class="del_cancel" style="color:  white; text-decoration: none;">Cancel</a>
+                        </button>
+                        <button id="add_btn" onclick="modal_del()">
+                            <p class="del_delete"> Delete </p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="backtwo">
+            <div class="flex-container">
+                <button id="add_button" onclick="modal_add('add', 0)">
+                    <img src="images\Path 18189.svg" class="search_icon" width="12px">
+                    <p class="inside_buttons_add"> Add </p>
+                </button>
+                <button id="edit_button" onclick="modal_add('edit', 1)">
+                    <img src="images\Path 18191.svg" class="search_icon" width="12px">
+                    <p class="inside_buttons_edit"> Edit </p>
+                </button>
+                <button id="del_button" onclick="modal_add('del', 2)">
+                    <img src="images\Path 18189-1.svg" class="search_icon" width="12px">
+                    <p class="inside_buttons_del"> Delete </p>
+                </button>
+                <div class="search_box">
+                    <input class="search_input" type="text" placeholder="Search by Invoice Number" style="background-color:transparent;">
+                    <img src="images\search-24px (3).svg">
+                </div>
+            </div>
+            <div class="table_content">
+                <table style="width:100%" id="table_id">
+                    <tr>
+                        <th><img src="images\check_box_outline_blank-black-18dp.svg" class="give_space"></th>
+                        <th>Customer Name</th>
+                        <th>Customer #</th>
+                        <th>Invoive #</th>
+                        <th>Invoive Amount</th>
+                        <th>Due Date</th>
+                        <th>Predicted Payment Date</th>
+                        <th>Notes</th>
+                    </tr>
+                </table>
+            </div>
+            <button class="chev-left" style="font-size:24px;" onclick="previous_page()"> <i class="fa fa-chevron-left"></i></button>
+            <button class="chev-right" style="font-size:24px;" onclick="next_page()"> <i class="fa fa-chevron-right"></i></button>
+        </div>
+        <script src="fetch.js"></script>
+</body>
+
+</html>
